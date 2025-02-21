@@ -1,13 +1,18 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-const MainSection = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("To-Do");
+const Edittask = () => {
+  const [task, setTask] = useState([]);
 
-  const navigate = useNavigate()
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_API_URL}/viewtask/${id}`).then((res) => {
+      console.log(res.data);
+      setTask(res.data);
+    });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,30 +20,22 @@ const MainSection = () => {
     const title = form.title.value;
     const description = form.description.value;
     const category = form.category.value;
+    const updatedTaskInfo = {
+      title,
+      description,
+      category,
+    };
+    console.log(updatedTaskInfo);
 
-    if (title.trim() && title.length <= 50) {
-      const newTask = {
-        title,
-        description,
-        timestamp: new Date().toISOString(),
-        category, // Dynamically set category
-      };
-
-      console.log(newTask)
-     
-      axios.post(`${import.meta.env.VITE_API_URL}/addtask`, newTask)
-      .then(res=>{
-        console.log(res.data)
-        navigate("/alltasks")
-      })
-
-    }
+    axios.put(`${import.meta.env.VITE_API_URL}/viewtask/${id}`).then((res) => {
+      console.log(res.data);
+    });
   };
 
   return (
-    <div className="py-5">
-      <button className="mt-5 border border-purple-700 rounded-md px-4 py-1">
-        Add New Task +
+    <div>
+      <button className="mt-5 border border-purple-700 rounded-md px-6 py-1.5">
+        Update Task
       </button>
 
       <form
@@ -48,7 +45,8 @@ const MainSection = () => {
         <input
           type="text"
           name="title"
-          onChange={(e) => setTitle(e.target.value)}
+          defaultValue={task.title}
+        //   onChange={(e) => setTitle(e.target.value)}
           placeholder="Task Title"
           required
           maxLength="50"
@@ -56,19 +54,20 @@ const MainSection = () => {
         />
         <textarea
           name="description"
-          onChange={(e) => setDescription(e.target.value)}
+        //   onChange={(e) => setDescription(e.target.value)}
           placeholder="Task Description (optional)"
           maxLength="200"
           rows={5}
           className="p-4 border border-teal-200"
+          defaultValue={task.description}
         />
 
         <label className="block font-medium text-left py-2 ml-3 text-teal-600">
           Add Progress Category
         </label>
         <select
-          
           name="category"
+          value={task.category}
           className="w-full border p-2 rounded h-16"
         >
           <option value="To-Do">To-Do</option>
@@ -77,11 +76,11 @@ const MainSection = () => {
         </select>
 
         <button type="submit" className="bg-teal-500 py-2 text-white font-bold">
-          Add Task
+          Edit Task
         </button>
       </form>
     </div>
   );
 };
 
-export default MainSection;
+export default Edittask;

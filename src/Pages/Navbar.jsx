@@ -34,7 +34,7 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost text-xl text-green-500">Orbitask</Link>
+          <Link to="/" className="btn text-xl text-teal-800 italic">Orbitask</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">

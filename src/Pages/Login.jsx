@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -29,10 +29,12 @@ const Login = () => {
           timer: 3500,
         });
 
-        if(user){
-          axios.post("http://localhost:5000/users", userInfo).then((res) => {
-            console.log(res.data);
-          });
+        if (user) {
+          axios
+            .post(`${import.meta.env.VITE_API_URL}/users`, userInfo)
+            .then((res) => {
+              console.log(res.data);
+            });
         }
 
         navigate("/");
@@ -44,8 +46,9 @@ const Login = () => {
 
   return (
     <div>
-      <div className="flex h-screen items-center justify-center bg-gray-100">
-        <div className="p-10 bg-white space-y-10 shadow-lg rounded-lg text-center">
+      <div className="p-5 flex flex-col h-screen items-center justify-center  bg-gray-100">
+       
+        <div className="p-20 bg-white space-y-10 shadow-lg rounded-lg text-center">
           <h1 className="text-2xl font-bold mb-4">Task Manager</h1>
           <button
             onClick={handleGoogleLogin}
@@ -58,6 +61,11 @@ const Login = () => {
             Manage tasks easily & efficiently
           </p>
         </div>
+
+        <Link to="/" className="bg-teal-500 mt-10 rounded-md text-white p-2">
+          {" "}
+          🏡Back to Home
+        </Link>
       </div>
     </div>
   );

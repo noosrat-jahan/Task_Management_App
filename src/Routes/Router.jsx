@@ -5,6 +5,7 @@ import Homepage from '../Pages/Homepage';
 import Errorpage from '../Pages/Errorpage';
 import AllTasks from '../Pages/AllTasks';
 import MainSection from '../Pages/MainSection';
+import Edittask from '../Pages/Edittask';
 
 const Router = createBrowserRouter([
     {
@@ -18,7 +19,11 @@ const Router = createBrowserRouter([
         {
           path: "alltasks",
           element: <AllTasks></AllTasks>
-        }
+        },
+        {
+          path: "edittask/:id",
+          element: <Edittask></Edittask>
+        },
       ]
       
     },

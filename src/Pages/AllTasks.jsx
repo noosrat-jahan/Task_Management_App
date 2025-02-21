@@ -2,13 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AllTasks = () => {
   const [tasks, setTask] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/viewtask").then((res) => {
+    axios.get(`${import.meta.env.VITE_API_URL}/viewtask`).then((res) => {
       console.log(res.data);
       setTask(res.data);
     });
@@ -25,7 +26,7 @@ const AllTasks = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/viewtask/${id}`).then((res) => {
+        axios.delete(`${import.meta.env.VITE_API_URL}/viewtask/${id}`).then((res) => {
           console.log(res.data);
 
           Swal.fire({
@@ -46,7 +47,7 @@ const AllTasks = () => {
       {tasks?.map((task, index) => (
         <div
           key={task._id}
-          className="bg-teal-50 p-5 shadow-md rounded-md flex gap-5 justify-evenly items-center"
+          className="bg-teal-50 p-5 mb-5 shadow-md rounded-md flex gap-5 justify-evenly items-center"
         >
           <h1>{index + 1}</h1>
           <h1 className="font-bold text-red-400 ">{task.title}</h1>
@@ -55,9 +56,9 @@ const AllTasks = () => {
           <h4 className="text-orange-600 border border-amber-300 p-3">
             {task.category}
           </h4>
-          <button>
+          <Link to={`/edittask/${task._id}`}>
             <FaEdit></FaEdit>
-          </button>
+          </Link>
           <button
             onClick={() => {
               handleDelete(task._id);
