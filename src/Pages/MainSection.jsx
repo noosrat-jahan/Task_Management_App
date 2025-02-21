@@ -20,7 +20,7 @@ const MainSection = () => {
   };
   return (
     <div>
-      <button className="border border-purple-700 rounded-md px-4 py-1">
+      <button className="mt-10 border border-purple-700 rounded-md px-4 py-1">
         Add New Task +
       </button>
 
