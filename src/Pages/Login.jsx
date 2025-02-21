@@ -3,6 +3,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Login = () => {
   const { googleLogin, setUser } = useContext(AuthContext);
@@ -14,6 +15,12 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         setUser(user);
+
+        const userInfo = {
+          UserId: user.uid,
+          Name: user.displayName,
+          Email: user.email,
+        };
         Swal.fire({
           position: "center",
           icon: "success",
@@ -21,7 +28,14 @@ const Login = () => {
           showConfirmButton: false,
           timer: 3500,
         });
-        navigate('/');
+
+        if(user){
+          axios.post("http://localhost:5000/users", userInfo).then((res) => {
+            console.log(res.data);
+          });
+        }
+
+        navigate("/");
       })
       .catch((err) => {
         console.log("Error:", err.message);

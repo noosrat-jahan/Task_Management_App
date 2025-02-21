@@ -1,10 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MainSection = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("To-Do");
+
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,6 +29,7 @@ const MainSection = () => {
       axios.post('http://localhost:5000/addtask', newTask)
       .then(res=>{
         console.log(res.data)
+        navigate("/alltasks")
       })
 
     }
