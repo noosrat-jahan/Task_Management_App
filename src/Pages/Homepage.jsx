@@ -6,8 +6,8 @@ import { Outlet } from 'react-router-dom';
 const Homepage = () => {
     return (
         <div>
-            <Navbar></Navbar>
-            <MainSection></MainSection>
+            <Navbar></Navbar>            
+            <Outlet></Outlet>
             
         </div>
     );

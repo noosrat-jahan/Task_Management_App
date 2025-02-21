@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+
+  const links = <>
+    <Link to="/alltasks" className="bg-green-800 text-white text-lg font-bold px-3 py-1.5 rounded-md">All Tasks</Link>
+  </>
   return (
     <div>
       <div className="navbar bg-teal-100 px-4">
@@ -27,52 +31,18 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
+              {links}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost text-xl">Orbitask</Link>
+          <Link to="/" className="btn btn-ghost text-xl text-green-500">Orbitask</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </details>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+            {links}
           </ul>
         </div>
         <div className="navbar-end">
-          <Link to="/login" className="btn">Login</Link>
+          <Link to="/login" className="btn bg-purple-600 text-white">Login</Link>
         </div>
       </div>
     </div>
