@@ -7,13 +7,12 @@ const Router = createBrowserRouter([
     {
       path: "/",
       element: <Homepage></Homepage>,
-      children: [
-        {
-          path: "login",
-          element: <Login></Login>
-        }
-      ]
+      
     },
+    {
+      path: "login",
+      element: <Login></Login>
+    }
 
   ]);
 
