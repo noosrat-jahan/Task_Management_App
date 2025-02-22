@@ -34,6 +34,8 @@ const Edittask = () => {
     });
   };
 
+ 
+
   return (
     <div>
       <button className="mt-5 border border-purple-700 rounded-md px-6 py-1.5">
@@ -71,6 +73,8 @@ const Edittask = () => {
           name="category"
           defaultValue={task.category}
           className="w-full border p-2 rounded h-16"
+          value={task.category || "To-Do"}
+          onChange={(e) => setTask({ ...task, category: e.target.value })}
         >
           <option value="To-Do">To-Do</option>
           <option value="In Progress">In Progress</option>
