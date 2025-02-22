@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Edittask = () => {
   const [task, setTask] = useState([]);
+  const navigate = useNavigate()
 
   const { id } = useParams();
 
@@ -27,8 +28,9 @@ const Edittask = () => {
     };
     console.log(updatedTaskInfo);
 
-    axios.put(`${import.meta.env.VITE_API_URL}/viewtask/${id}`).then((res) => {
+    axios.put(`${import.meta.env.VITE_API_URL}/viewtask/${id}`, updatedTaskInfo).then((res) => {
       console.log(res.data);
+      navigate("/alltasks")
     });
   };
 
@@ -67,7 +69,7 @@ const Edittask = () => {
         </label>
         <select
           name="category"
-          value={task.category}
+          defaultValue={task.category}
           className="w-full border p-2 rounded h-16"
         >
           <option value="To-Do">To-Do</option>
