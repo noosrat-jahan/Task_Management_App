@@ -46,9 +46,9 @@ const Login = () => {
 
   return (
     <div>
-      <div className="p-5 flex flex-col h-screen items-center justify-center  bg-gray-100">
+      <div className="p-5 flex flex-col items-center justify-center min-h-screen bg-gray-100">
        
-        <div className="p-20 bg-white space-y-10 shadow-lg rounded-lg text-center">
+        <div className="md:p-20 p-10 bg-white space-y-10 shadow-lg rounded-lg text-center">
           <h1 className="text-2xl font-bold mb-4">Task Manager</h1>
           <button
             onClick={handleGoogleLogin}

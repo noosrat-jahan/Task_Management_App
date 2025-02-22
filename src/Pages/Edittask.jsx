@@ -44,7 +44,7 @@ const Edittask = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="add-task-form mt-5  flex flex-col justify-center w-8/12 mx-auto border border-teal-300"
+        className="add-task-form my-5  flex flex-col justify-center w-8/12 mx-auto border border-teal-300"
       >
         <input
           type="text"
